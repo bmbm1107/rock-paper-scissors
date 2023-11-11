@@ -4,33 +4,32 @@ function game() {
 
     let userScore = 0;
     let computerScore = 0;
-    let result
+    let result = (userScore > computerScore) ? "You won!" : "You loose!";
 
     for (let i = 0; i < 5; ++i) {
 
-    result = playRound(getComputerChoice(), getPlayerChoice());
-// Log the results of the round
+        result = playRound(getComputerChoice(), getPlayerChoice());
+        // Log the results of the round
         console.log(result)
 
+        // Calculating Score by the return string of playround() -- Not so nice solution...
+        if (result.slice(0, 7) === "You won") {
+
+            ++userScore
+
+        } else if (result.slice(0, 9) === "You loose") {
+
+            ++computerScore
+        } else {
+            ++userScore
+            ++computerScore
+        }
+
     }
-// Calculating Score by the return string of playround() -- Not so nice solution...
-    if (result.slice(0, 7) === "You won") {
 
-        ++userScore
-
-    } else if (result.slice(0, 9) === "You loose") {
-
-        ++computerScore
-    }
-
-    getResult();
-}
-
-
-// Results of the game
-function getResult () {
-
-    return (userScore > computerScore) ? "You won" : "you loose";
+    alert(`${result}
+    Your score: ${userScore}
+    Computer's score: ${computerScore}`)
 
 }
 
