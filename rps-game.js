@@ -14,11 +14,11 @@ function game() {
 
     }
 // Calculating Score by the return string of playround() -- Not so nice solution...
-    if (result.slice(0, 7) === "You won") {
+    if (result.slice(0, 7) === 'You won') {
 
         ++userScore
 
-    } else if (result.slice(0, 9) === "You loose") {
+    } else if (result.slice(0, 9) === 'You loose') {
 
         ++computerScore
     }
@@ -30,7 +30,7 @@ function game() {
 // Results of the game
 function getResult () {
 
-    return (userScore > computerScore) ? "You won" : "you loose";
+    return (userScore > computerScore) ? 'You won' : 'you loose';
 
 }
 
@@ -41,7 +41,7 @@ function getComputerChoice() {
 
     let getRandomInt = () => Math.floor(Math.random() * 3);
 
-    return (getRandomInt() === 0) ? "Rock" : (getRandomInt() === 1) ? "Paper" : "Scissors";
+    return (getRandomInt() === 0) ? 'Rock' : (getRandomInt() === 1) ? 'Paper' : 'Scissors';
 }
 
 function getPlayerChoice() {
@@ -50,16 +50,16 @@ function getPlayerChoice() {
 
     let userInput
 
-    userInput = prompt("Choose your weapon!", "Rock // Paper // Scissors");
+    userInput = prompt('Choose your weapon!', 'Rock // Paper // Scissors');
 
     userInput = userInput.slice(0, 1).toUpperCase() + userInput.slice(1).toLocaleLowerCase();
 
 
     // check the input value. alert if its not rock, paper or scissors, then call the function again.  
 
-    if (!(userInput === "Rock" || userInput === "Paper" || userInput === "Scissors")) {
+    if (!(userInput === 'Rock' || userInput === 'Paper' || userInput === 'Scissors')) {
 
-        alert("You have to choose rock, paper or scissors")
+        alert('You have to choose rock, paper or scissors')
 
         getPlayerChoice()
     } else {
@@ -71,27 +71,33 @@ function getPlayerChoice() {
 
 function playRound(player, computer) {
 
+    let roundResult = []
+
 
     // Check if its a tie, otherwise check the possible scenarios from the perspective of player
 
     if (player === computer) {
 
-        return "It's a tie!"
+        return 'It\'s a tie!'
     } else {
 
         switch (player) {
 
-            case "Rock":
-                return (computer === "Scissors") ? "You won, scissors destroyed by your rock" : "You loose, paper wrapped your rock";
-            case "Paper":
-                return (computer === "Rock") ? "You won, you wrapped the enemy rock" : "You loose, scissors cut you in half";
-            case "Scissors":
-                return (computer === "Paper") ? "You won, the enemy paper is in pieces" : "You loose, the enemy rock destroyed your scissor";
+            case 'Rock':
+                 (computer === 'Scissors') ? roundResult.push(true, 'You won, scissors destroyed by your rock' ) : roundResult.push(false, 'You loose, paper wrapped your rock'); 
+                 break;
+            case 'Paper':
+                 (computer === 'Rock') ? roundResult.push(true, 'You won, you wrapped the enemy rock') : roundResult.push(false, 'You loose, scissors cut you in half');
+                 break;
+            case 'Scissors':
+                 (computer === 'Paper') ? roundResult.push(true, 'You won, the enemy paper is in pieces') : roundResult.push(false, 'You loose, the enemy rock destroyed your scissor');
 
-                break;
+                 break; 
 
 
         }
+
+    return roundResult;
 
     }
 
