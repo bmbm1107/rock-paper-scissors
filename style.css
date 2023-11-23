@@ -1,0 +1,139 @@
+﻿body {
+
+    background-color: ivory;
+    padding: 0;
+    margin: 0;
+}
+
+
+h1 {
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+.result-container {
+    background-color: aquamarine;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.result-container>div {
+
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+.control-container {
+    background-color: gray;
+    height: 50vh;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+#message {
+   
+    display: inline-block;
+   height: 1vh;
+   max-width: 75%;
+   text-align: center;
+    font-size: 25px;
+   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.input {
+    border: 3px solid pink;
+    border-radius: 30px;
+    padding: 100px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: pink;
+
+}
+
+.result {
+    border-radius: 30px;
+    height: 250px;
+    width: 250px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: whitesmoke;
+    background-color: black;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    flex-direction: column;
+}
+
+div.input:hover {
+
+    background-color: antiquewhite;
+    color: black;
+    transition: 0.7s;
+}
+
+
+
+
+
+@media only screen and (max-width: 600px) {
+
+    .result {
+       
+        height: 20%;
+        width: 250px;
+        flex-direction: row;
+        align-items:center;
+        justify-content: space-evenly;
+        font-size: 12px;
+
+    }
+    
+
+
+    .control-container {
+        background-color: gray;
+        height: 50vh;
+        display: flex;
+        gap: 30px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .input {
+        width: 100px;
+        padding: 5px 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+.result-container {
+   
+    flex-direction: column;
+
+}
+
+.result-container>div {
+
+flex-direction: column;
+}
+
+.control-container {
+    flex-direction: column;
+}
+    
+}
+
+.hide {
+    display: none;
+}

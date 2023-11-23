@@ -1,106 +1,159 @@
 
-
-function game() {
-
+(function () {
+    var btnStart = document.querySelector('#inp-start');
+    var btn
+    btnStart.addEventListener("click", game)
     let userScore = 0;
     let computerScore = 0;
-    let result
-
-    for (let i = 0; i < 5; ++i) {
-
-    result = playRound(getComputerChoice(), getPlayerChoice());
-// Log the results of the round
-        console.log(result)
-
-    }
-// Calculating Score by the return string of playround() -- Not so nice solution...
-    if (result.slice(0, 7) === 'You won') {
-
-        ++userScore
-
-    } else if (result.slice(0, 9) === 'You loose') {
-
-        ++computerScore
-    }
-
-    getResult();
-}
-
-
-// Results of the game
-function getResult () {
-
-    return (userScore > computerScore) ? 'You won' : 'you loose';
-
-}
-
-
-function getComputerChoice() {
-
-    // get rock, paper or scissors value, based on random numbers
-
-    let getRandomInt = () => Math.floor(Math.random() * 3);
-
-    return (getRandomInt() === 0) ? 'Rock' : (getRandomInt() === 1) ? 'Paper' : 'Scissors';
-}
-
-function getPlayerChoice() {
-
-    // prompting user, to choose value
-
-    let userInput
-
-    userInput = prompt('Choose your weapon!', 'Rock // Paper // Scissors');
-
-    userInput = userInput.slice(0, 1).toUpperCase() + userInput.slice(1).toLocaleLowerCase();
-
-
-    // check the input value. alert if its not rock, paper or scissors, then call the function again.  
-
-    if (!(userInput === 'Rock' || userInput === 'Paper' || userInput === 'Scissors')) {
-
-        alert('You have to choose rock, paper or scissors')
-
-        getPlayerChoice()
-    } else {
-
-        return userInput
-    }
-
-}
-
-function playRound(player, computer) {
-
+    document.querySelector('#user-score').textContent = userScore
+    document.querySelector('#computer-score').textContent = computerScore
     let roundResult = []
+    let btnIngame = Array.from(document.querySelectorAll('.ingame'))
+
+    function game() {
 
 
-    // Check if its a tie, otherwise check the possible scenarios from the perspective of player
+        btnStart.classList.add('hide')
 
-    if (player === computer) {
 
-        return 'It\'s a tie!'
-    } else {
 
-        switch (player) {
+        resetScores();
+        printScores();
 
-            case 'Rock':
-                 (computer === 'Scissors') ? roundResult.push(true, 'You won, scissors destroyed by your rock' ) : roundResult.push(false, 'You loose, paper wrapped your rock'); 
-                 break;
-            case 'Paper':
-                 (computer === 'Rock') ? roundResult.push(true, 'You won, you wrapped the enemy rock') : roundResult.push(false, 'You loose, scissors cut you in half');
-                 break;
-            case 'Scissors':
-                 (computer === 'Paper') ? roundResult.push(true, 'You won, the enemy paper is in pieces') : roundResult.push(false, 'You loose, the enemy rock destroyed your scissor');
 
-                 break; 
+        let playerChoice 
+
+
+        for (i of btnIngame) {
+
+            i.classList.remove('hide')
+            i.addEventListener('click', (event) => {
+            i = event.target.textContent
+            playRound(i)
+
+        } )
+        }
+
+
+    }   
+
+
+
+
+    function getComputerChoice() {
+
+        // get rock, paper or scissors value, based on random numbers
+
+        let getRandomInt = () => Math.floor(Math.random() * 3);
+
+        return (getRandomInt() === 0) ? 'Rock' : (getRandomInt() === 1) ? 'Paper' : 'Scissors';
+    }
+
+
+
+    function evaluation(player, computer) {
+
+        let roundResult = []
+
+
+        // Check if its a tie, otherwise check the possible scenarios from the perspective of player
+
+        if (player === computer) {
+
+            roundResult.push(undefined, 'It\s a tie!')
+        } else {
+
+            switch (player) {
+
+                case 'Rock':
+                    (computer === 'Scissors') ? roundResult.push(true, 'You won, scissors destroyed by your rock') : roundResult.push(false, 'You loose, paper wrapped your rock');
+                    break;
+                case 'Paper':
+                    (computer === 'Rock') ? roundResult.push(true, 'You won, you wrapped the enemy rock') : roundResult.push(false, 'You loose, scissors cut you in half');
+                    break;
+                case 'Scissors':
+                    (computer === 'Paper') ? roundResult.push(true, 'You won, the enemy paper is in pieces') : roundResult.push(false, 'You loose, the enemy rock destroyed your scissor');
+
+                    break;
+
+
+            }
+
 
 
         }
+        return roundResult;
+    }
 
-    return roundResult;
+
+    function resetScores() {
+        userScore = 0;
+        computerScore = 0;
+
 
     }
 
-}
+
+    function printScores() {
+        document.querySelector('#user-score').textContent = userScore
+        document.querySelector('#computer-score').textContent = computerScore
+    }
 
 
+    function playRound(choice) {
+        let playerChoice = choice
+        let computerChoice = getComputerChoice()
+
+
+        roundResult = evaluation(playerChoice, computerChoice)
+
+        if (roundResult[0] === true) {
+            ++userScore
+        }
+        else if (roundResult[0] === false) {
+            ++computerScore
+        };
+
+
+
+
+        printScores();
+
+        evaluateGame()
+
+
+
+
+    }
+
+    function evaluateGame() {
+        if ((computerScore === 5) || (userScore === 5)) {
+
+
+
+            btnStart.classList.remove('hide')
+            for (i of btnIngame) {
+                i.classList.add('hide')
+
+            }
+
+            let endGameMessage = () => {
+
+                return (userScore === 5) ? "You won this party!" : "The Computer won this party!"
+            }
+            document.querySelector('#message').textContent = endGameMessage()
+
+
+
+        } else {
+
+
+            document.querySelector('#message').textContent = roundResult[1]
+
+        }
+
+    }
+
+
+
+})();
