@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-<script src="rps-game.js"></script>
+    <link rel="stylesheet" href="style.css" />
+
+    <script src="rps-game.js" defer></script>
 
 </head>
 
@@ -12,6 +15,33 @@
 
 <body>
 
-  
+
+    <div class="result-container">
+        <div>
+            <div class="result">
+                <h2>User:</h2>
+                <p id="user-score"></p>
+            </div>
+
+            <div class="result">
+                <h2>Computer:</h2>
+                <p id="computer-score"></p>
+            </div>
+        </div>
+
+    <p id="message"></p>
+
+    </div>
+
+
+
+    <div class="control-container">
+        <div class="input" id="inp-start">Start!</div>
+        <div class="input ingame hide" id="inp-rock">Rock</div>
+        <div class="input ingame hide" id="inp-paper">Paper</div>
+        <div class="input ingame hide" id="inp-sciss">Scissors</div>
+    </div>
+
 </body>
+
 </html>
